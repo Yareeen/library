@@ -1,6 +1,7 @@
 package com.book.library.model;
 
-import jakarta.persistence.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "books")
@@ -10,6 +11,8 @@ public class Book {
     private Long id;
     private String title;
     private String author;
+    @ManyToOne //her kitabın bir adet rafı vardır. Bir rafın birden çok kitabı vardır.
+    @JoinColumn(name = "shelf_id")// shelf tablosundaki ilgili kolon adı
     private Shelf shelf; //raf bilgisi, raf modelinden gelecek.
 
     public Book(Long id, String title, String author, Shelf shelf) {

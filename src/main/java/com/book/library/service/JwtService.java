@@ -22,7 +22,7 @@ public class JwtService {
 
     public String generateToken(String userName) {   //Tokenı keyle şifreliyorum.
        // Map<String, Object> claims = new HashMap<>();  //jwtnin içerdiği bilgileri saklamak için
-        //claims.put("yaren", "can");
+        // claims.put("yaren", "can");
 
         return Jwts.builder()
                 //.setClaims(userName) // JWT için özel talepleri ayarlamak için kullanılır.

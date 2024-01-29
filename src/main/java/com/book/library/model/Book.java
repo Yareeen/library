@@ -22,6 +22,9 @@ public class Book {
         this.shelf = shelf;
     }
 
+    public Book() {
+    }
+
     public Long getId() {
         return id;
     }

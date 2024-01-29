@@ -24,7 +24,7 @@ public class WebSecurityConfig  {
                 .formLogin(AbstractHttpConfigurer::disable) //login formu çıkmaz. headerla yollarız.
                 .authorizeHttpRequests(x ->
                         x
-                                .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/auth/**","/h2-console/**").permitAll()
                                 .anyRequest().authenticated())
 
                 .formLogin(Customizer.withDefaults())

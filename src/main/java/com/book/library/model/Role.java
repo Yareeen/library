@@ -13,6 +13,9 @@ public enum Role implements GrantedAuthority {
         this.value = value;
     }
 
+    Role() {
+    }
+
     private String value;
     @Override
     public String getAuthority() {

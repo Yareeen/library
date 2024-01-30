@@ -1,22 +1,28 @@
 package com.book.library.DTO;
 
-import javax.management.relation.Role;
+import com.book.library.model.Role;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
 
 public class CreateUserRequest{
-        String name;
-        String username;
-        String password;
-        Role authorities;
+        private String name;
+        private String username;
+        private String password;
 
-    public CreateUserRequest(String name, String username, String password, Role authorities) {
+        private Set<Role> authorities;
+
+    public CreateUserRequest(String name, String username, String password, Set<Role> authorities) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
     }
 
-    public CreateUserRequest(String name) {
-        this.name = name;
+    public CreateUserRequest() {
     }
 
     public String getName() {
@@ -31,9 +37,7 @@ public class CreateUserRequest{
         return password;
     }
 
-    public Role getAuthorities() {
-        return authorities;
-    }
+
 
     public void setName(String name) {
         this.name = name;
@@ -47,9 +51,11 @@ public class CreateUserRequest{
         this.password = password;
     }
 
-    public void setAuthorities(Role authorities) {
-        this.authorities = authorities;
+    public Set<Role> getAuthorities() {
+        return authorities;
     }
 
-
+    public void setAuthorities(Set<Role> authorities) {
+        this.authorities = authorities;
+    }
 }

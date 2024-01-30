@@ -1,6 +1,7 @@
 package com.book.library.service;
 
 import com.book.library.DTO.CreateUserRequest;
+import com.book.library.model.Role;
 import com.book.library.model.User;
 import com.book.library.repository.UserRepository;
 import com.book.library.security.PasswordConfig;
@@ -12,7 +13,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
+
+import static com.book.library.model.Role.ROLE_USER;
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -39,8 +45,7 @@ public class UserService implements UserDetailsService {
         newUser.setName(user.getName());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.passwordEncoder().encode(user.getPassword()));
-        newUser.setAuthorities((Collection<? extends GrantedAuthority>) user.getAuthorities());
-        newUser.setAccountNonExpired(true);
+        newUser.setAuthorities(Collections.singleton(ROLE_USER));
         newUser.setEnabled(true);
         newUser.setAccountNonLocked(true);
         newUser.setCredentialsNonExpired(true);

@@ -8,15 +8,12 @@ public enum Role implements GrantedAuthority {
     ROLE_USER("USER"),
     ROLE_ADMIN("ADMIN"),
     ROLE_LIBRARIAN("LIBRARIAN");
-
+    private String value;
     Role(String value) {
         this.value = value;
     }
 
-    Role() {
-    }
 
-    private String value;
     @Override
     public String getAuthority() {
         return name();

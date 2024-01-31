@@ -1,15 +1,9 @@
 package com.book.library.bootstrap;
 
-import com.book.library.model.User;
 import com.book.library.repository.UserRepository;
 import com.book.library.security.PasswordConfig;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-
-import java.util.Collections;
-
-import static com.book.library.model.Role.ROLE_ADMIN;
 @Component
 public class Bootstrap implements CommandLineRunner {
 
@@ -26,7 +20,7 @@ public class Bootstrap implements CommandLineRunner {
         bootstrapAdmin();
     }
     private void bootstrapAdmin(){
-
+/*
         User admin = new User(
                 "Yaren",
                 "adminyaren",
@@ -38,7 +32,9 @@ public class Bootstrap implements CommandLineRunner {
                 true
         );
 
-        userRepository.save(admin);
+        userRepository.save(admin);*/
     }
+
+
 
 }

@@ -12,20 +12,20 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+
 @Service
 public class JwtService {
 
     @Value("${jwt.key}")
     private String SECRET;
 
-    public String generateToken(String userName) {   //Tokenı keyle şifreliyorum.
-       // Map<String, Object> claims = new HashMap<>();  //jwtnin içerdiği bilgileri saklamak için
-        // claims.put("yaren", "can");
+    public String generateToken(String userName) {
+       // Map<String, Object> claims = new HashMap<>();
+        //claims.put("yaren","can");
+        //claims.put("roles", authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
 
         return Jwts.builder()
-                //.setClaims(userName) // JWT için özel talepleri ayarlamak için kullanılır.
+                //.setClaims(claims) // JWT için özel talepleri ayarlamak için kullanılır.
                 .setSubject(userName) //isim
                 .setIssuedAt(new Date(System.currentTimeMillis())) //token ne zaman üretildi
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 2)) //geçersiz olma süresi // 2 dakika

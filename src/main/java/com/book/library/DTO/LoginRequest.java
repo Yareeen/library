@@ -1,15 +1,15 @@
 package com.book.library.DTO;
 
-public class AuthRequest {
+public class LoginRequest {
     String username;
     String password;
 
-    public AuthRequest(String username, String password) {
+    public LoginRequest(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public AuthRequest() {
+    public LoginRequest() {
     }
 
     public String getUsername() {

@@ -12,9 +12,10 @@ public class Book {
     private String title;
     private String author;
     @ManyToOne //her kitabın bir adet rafı vardır. Bir rafın birden çok kitabı vardır.
-    @JoinColumn(name = "shelf_id")// shelf tablosundaki ilgili kolon adı
+    @JoinColumn(name = "shelf_id", nullable = false)// shelf tablosundaki ilgili kolon adı
     private Shelf shelf; //raf bilgisi, raf modelinden gelecek.
 
+    //TODO: isbn numarası eklenebilir.
     public Book(Long id, String title, String author, Shelf shelf) {
         this.id = id;
         this.title = title;

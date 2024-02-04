@@ -9,25 +9,22 @@ public class Shelf {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String location;
+    private String name;
     @OneToMany(mappedBy = "shelf")
     private List<Book> books;
 
-    public Shelf(Long id, String location, List<Book> books) {
+    public Shelf(Long id, String name, List<Book> books) {
         this.id = id;
-        this.location = location;
+        this.name = name;
         this.books = books;
-    }
-
-    public Shelf() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getLocation() {
-        return location;
+    public String getName() {
+        return name;
     }
 
     public List<Book> getBooks() {
@@ -38,8 +35,8 @@ public class Shelf {
         this.id = id;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setBooks(List<Book> books) {

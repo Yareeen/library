@@ -1,9 +1,14 @@
 package com.book.library.bootstrap;
 
+import com.book.library.model.Role;
+import com.book.library.model.User;
 import com.book.library.repository.UserRepository;
 import com.book.library.security.PasswordConfig;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+
 @Component
 public class Bootstrap implements CommandLineRunner {
 
@@ -19,22 +24,25 @@ public class Bootstrap implements CommandLineRunner {
     public void run(String... args) throws Exception {
         bootstrapAdmin();
     }
-    private void bootstrapAdmin(){
-/*
+
+
+    private void bootstrapAdmin() {
+        String adminUser = "adminUser";
+        if (userRepository.findByUsername(adminUser).isPresent()) return;
+
         User admin = new User(
-                "Yaren",
-                "adminyaren",
+                "admin",
+                adminUser,
                 passwordConfig.passwordEncoder().encode("pass"),
-                Collections.singleton(ROLE_ADMIN),
+                Collections.singleton(Role.ROLE_ADMIN),
                 true,
                 true,
                 true,
                 true
         );
 
-        userRepository.save(admin);*/
+        userRepository.save(admin);
     }
-
 
 
 }

@@ -34,11 +34,7 @@ public class Bootstrap implements CommandLineRunner {
                 "admin",
                 adminUser,
                 passwordConfig.passwordEncoder().encode("pass"),
-                Collections.singleton(Role.ROLE_ADMIN),
-                true,
-                true,
-                true,
-                true
+                Collections.singleton(Role.ROLE_ADMIN)
         );
 
         userRepository.save(admin);

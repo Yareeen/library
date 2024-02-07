@@ -1,64 +1,35 @@
 package com.book.library.controller;
 
 import com.book.library.DTO.AuthResponse;
-import com.book.library.DTO.CreateUserRequest;
+import com.book.library.DTO.CreateUserRequestDto;
 import com.book.library.DTO.LoginRequest;
-import com.book.library.repository.UserRepository;
-import com.book.library.security.PasswordConfig;
-import com.book.library.service.JwtService;
+import com.book.library.service.AuthService;
 import com.book.library.service.UserService;
+import com.book.library.utils.ResponseCreator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private AuthenticationManager authenticationManager;
     private final UserService userService;
-    private final PasswordConfig passwordConfig;
-    private final UserRepository userRepository;
-    private final JwtService jwtService;
-    public AuthController(AuthenticationManager authenticationManager, UserService userService, PasswordConfig passwordConfig, UserRepository userRepository, JwtService jwtService) {
-        this.authenticationManager = authenticationManager;
+    private final AuthService authService;
+    public AuthController(UserService userService, AuthService authService) {
         this.userService = userService;
-        this.passwordConfig = passwordConfig;
-        this.userRepository = userRepository;
-        this.jwtService = jwtService;
-    }
-
-    @GetMapping
-    public String homepage(){
-        return "Hoşgeldiniz";
+        this.authService = authService;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody CreateUserRequest request) {
-
-        userService.createUser(request);
-        return new ResponseEntity<>("User Oluşturuldu.", HttpStatus.CREATED);
+    public ResponseEntity<ResponseCreator<Long>> registerUser(@RequestBody CreateUserRequestDto requestDto) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new ResponseCreator<>(userService.createUser(requestDto).getId()));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginDto){
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginDto.getUsername(),
-                        loginDto.getPassword()));
-
-        if (authentication.isAuthenticated()) {
-            String token = jwtService.generateToken(loginDto.getUsername());
-            AuthResponse authResponse = new AuthResponse(token);
-            return new ResponseEntity<>(authResponse, HttpStatus.OK);
-
-        }
-
-        throw new UsernameNotFoundException("invalid username {} " + loginDto.getUsername());
+    public ResponseEntity<ResponseCreator<AuthResponse>> login(@RequestBody LoginRequest loginDto){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseCreator<>(authService.login(loginDto)));
     }
-
 
 }

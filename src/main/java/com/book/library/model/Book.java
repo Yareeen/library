@@ -16,15 +16,6 @@ public class Book {
     private Shelf shelf; //raf bilgisi, raf modelinden gelecek.
 
     //TODO: isbn numarası eklenebilir.
-    public Book(Long id, String title, String author, Shelf shelf) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.shelf = shelf;
-    }
-
-    public Book() {
-    }
 
     public Long getId() {
         return id;
@@ -40,10 +31,6 @@ public class Book {
 
     public Shelf getShelf() {
         return shelf;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setTitle(String title) {

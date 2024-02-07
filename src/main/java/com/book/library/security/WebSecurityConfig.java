@@ -1,5 +1,6 @@
 package com.book.library.security;
 
+import com.book.library.exception.AuthenticationEntryPointException;
 import com.book.library.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,6 +43,7 @@ public class WebSecurityConfig  {
                                 .anyRequest().authenticated())
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //Özellikle token tabanlı kimlik doğrulama (token-based authentication) kullanıldığında, SessionCreationPolicy.STATELESS ayarı sıklıkla tercih edilir. Token tabanlı kimlik doğrulama, her isteğin kendi kimlik bilgilerini taşıdığı ve sunucunun durumunu (state) saklamadığı bir mekanizmadır.
                 .authenticationProvider(authenticationProvider())
+                .exceptionHandling(x -> x.authenticationEntryPoint(new AuthenticationEntryPointException()))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); //gelen HTTP isteklerini kontrol eder, gerekirse kimlik doğrulamasını yapar ve bir kullanıcı için bir JWT (JSON Web Token) oluşturur veya doğrular. validate işlemi yapar.
 
          return security.build();
@@ -58,7 +60,6 @@ public class WebSecurityConfig  {
     @Bean //gelen isteği tokena çevirmeden önce authenticate işlemi yapar.
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
-
     }
 
 }

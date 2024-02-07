@@ -1,5 +1,6 @@
 package com.book.library.service;
 
+import com.book.library.exception.EntityNotFountException;
 import com.book.library.model.Shelf;
 import com.book.library.repository.ShelfRepository;
 import org.springframework.stereotype.Service;
@@ -46,4 +47,7 @@ public class ShelfService {
     }
 
 
+    public Shelf findById(Long id) {
+        return shelfRepository.findById(id).orElseThrow(() -> new EntityNotFountException("Shelf not found"));
+    }
 }

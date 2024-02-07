@@ -6,9 +6,11 @@ import com.book.library.model.User;
 import com.book.library.repository.BookRepository;
 import com.book.library.repository.BorrowingBookRepository;
 import com.book.library.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
+@Service
 public class BorrowingBookService {
 
     private final BorrowingBookRepository borrowingBookRepository;

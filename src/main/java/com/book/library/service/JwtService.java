@@ -20,7 +20,7 @@ public class JwtService {
     private String SECRET;
 
     public String generateToken(String userName) {
-       // Map<String, Object> claims = new HashMap<>();
+        // Map<String, Object> claims = new HashMap<>();
         //claims.put("yaren","can");
         //claims.put("roles", authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
 
@@ -28,7 +28,7 @@ public class JwtService {
                 //.setClaims(claims) // JWT için özel talepleri ayarlamak için kullanılır.
                 .setSubject(userName) //isim
                 .setIssuedAt(new Date(System.currentTimeMillis())) //token ne zaman üretildi
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 2)) //geçersiz olma süresi // 2 dakika
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 8)) //geçersiz olma süresi // 8 saat
                 .signWith(getSignKey(), SignatureAlgorithm.HS256) //keyi alır.
                 .compact();
     }

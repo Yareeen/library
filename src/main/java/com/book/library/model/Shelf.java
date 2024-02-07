@@ -13,6 +13,9 @@ public class Shelf {
     @OneToMany(mappedBy = "shelf")
     private List<Book> books;
 
+    public Shelf() {
+    }
+
     public Shelf(Long id, String name, List<Book> books) {
         this.id = id;
         this.name = name;

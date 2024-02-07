@@ -1,6 +1,6 @@
 package com.book.library.service;
 
-import com.book.library.DTO.CreateUserRequest;
+import com.book.library.DTO.CreateUserRequestDto;
 import com.book.library.model.User;
 import com.book.library.repository.UserRepository;
 import com.book.library.security.PasswordConfig;
@@ -29,20 +29,16 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public User createUser(CreateUserRequest user) {
+    public User createUser(CreateUserRequestDto requestDto) {
         // Assuming you have a constructor or a builder method in your User class
         User newUser = new User();
-        // Set properties for the new user based on the provided user
-        newUser.setName(user.getName());
-        newUser.setUsername(user.getUsername());
-        newUser.setPassword(passwordEncoder.passwordEncoder().encode(user.getPassword()));
-        newUser.setAuthorities(user.getAuthorities());
-        newUser.setEnabled(true);
-        newUser.setAccountNonLocked(true);
-        newUser.setAccountNonExpired(true);
-        newUser.setCredentialsNonExpired(true);
+        // Set properties for the new requestDto based on the provided requestDto
+        newUser.setName(requestDto.getName());
+        newUser.setUsername(requestDto.getUsername());
+        newUser.setPassword(passwordEncoder.passwordEncoder().encode(requestDto.getPassword()));
+        newUser.setAuthorities(requestDto.getAuthorities());
 
-        // Return the newly created user
+        // Return the newly created requestDto
         return userRepository.save(newUser);
     }
 
